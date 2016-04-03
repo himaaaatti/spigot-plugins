@@ -50,7 +50,11 @@ class  Rocksmash: JavaPlugin() {
                     }
                     val player = event.getPlayer()
 		    val item = player.getInventory().getItemInMainHand().getType()
-		    getLogger().info(item.toString());
+		    if(item == Material.WOOD_PICKAXE ||
+		       item == Material.STONE_PICKAXE ||
+		       item == Material.IRON_PICKAXE ||
+		       item == Material.GOLD_PICKAXE ||
+		       item == Material.DIAMOND_PICKAXE){
                     for (modY in -1..1) {
                         for (modX in -1..1) {
                             for (modZ in -1..1) {
@@ -58,6 +62,7 @@ class  Rocksmash: JavaPlugin() {
                                 breakBlock(block, player)
                             }
                         }
+		  }
 		  }
                 }
             },
