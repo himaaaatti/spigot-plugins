@@ -1,4 +1,4 @@
-package com.github.himaaaatti.spigot.plugin.rocksmash
+package com.github.himaaaatti.spigot.plugin.cut
 
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -8,30 +8,21 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.plugin.java.JavaPlugin
 
-class  Rocksmash: JavaPlugin() {
+class Cut: JavaPlugin() {
     override fun onEnable() {
         getServer().getPluginManager().registerEvents(
             object : Listener {
-                fun isOre(block: Block) = when (block.getType()) {
-                    Material.IRON_ORE,
-		    Material.GOLD_ORE,
-		    Material.COAL_ORE,
-		    Material.LAPIS_ORE,
-		    Material.DIAMOND_ORE,
-		    Material.EMERALD_ORE,
-		    Material.GLOWING_REDSTONE_ORE,
-		    Material.QUARTZ_ORE,
-		    Material.REDSTONE_ORE,
-		    Material.OBSIDIAN -> true
+                fun isLog(block: Block) = when (block.getType()) {
+                    Material.LOG, Material.LOG_2 -> true
                     else -> false
                 }
 
                 fun breakBlock(block: Block, player: Player) {
                     getServer().getScheduler().scheduleSyncDelayedTask(
-                        this@Rocksmash,
+                        this@Cut,
                         object : Runnable {
                             override fun run() {
-                                if (player.isValid() && isOre(block)) {
+                                if (player.isValid() && isLog(block)) {
                                     val newEvent = BlockBreakEvent(block, player)
                                     getServer().getPluginManager().callEvent(newEvent)
                                     block.breakNaturally()
@@ -44,21 +35,19 @@ class  Rocksmash: JavaPlugin() {
 
                 @EventHandler
                 fun onBlockBreak(event: BlockBreakEvent) {
-                    val ore = event.getBlock()
-                    if (!isOre(ore)) {
+                    val woodlog = event.getBlock()
+                    if (!isLog(woodlog)) {
                         return
                     }
                     val player = event.getPlayer()
-		    val item = player.getInventory().getItemInMainHand().getType()
-		    getLogger().info(item.toString());
-                    for (modY in -1..1) {
+                    for (modY in 0..1) {
                         for (modX in -1..1) {
                             for (modZ in -1..1) {
-                                val block = ore.getRelative(modX, modY, modZ)
+                                val block = woodlog.getRelative(modX, modY, modZ)
                                 breakBlock(block, player)
                             }
                         }
-		  }
+                    }
                 }
             },
             this
