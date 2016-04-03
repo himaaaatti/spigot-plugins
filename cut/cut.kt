@@ -16,6 +16,15 @@ class Cut: JavaPlugin() {
                     Material.LOG, Material.LOG_2 -> true
                     else -> false
                 }
+                
+                fun isAxe(type: Material) = when(type) {
+                    Material.DIAMOND_AXE,
+                    Material.GOLD_AXE,
+                    Material.IRON_AXE,
+                    Material.STONE_AXE,
+                    Material.WOOD_AXE   -> true
+                    else -> false
+                }
 
                 fun breakBlock(block: Block, player: Player) {
                     getServer().getScheduler().scheduleSyncDelayedTask(
@@ -36,11 +45,14 @@ class Cut: JavaPlugin() {
                 @EventHandler
                 fun onBlockBreak(event: BlockBreakEvent) {
                     val woodlog = event.getBlock()
-                    if (!isLog(woodlog)) {
+                    val player = event.getPlayer()
+                    if (!isLog(woodlog) 
+                        || !isAxe(player.getInventory().getItemInMainHand().getType())) 
+                    {
                         return
                     }
-                    val player = event.getPlayer()
-                    for (modY in 0..1) {
+
+                    for (modY in -1..1) {
                         for (modX in -1..1) {
                             for (modZ in -1..1) {
                                 val block = woodlog.getRelative(modX, modY, modZ)

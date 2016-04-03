@@ -14,7 +14,3 @@ all: $(JARS)
 	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@ 
 	jar uf $@ $(dir $<)plugin.yml
 
-clean:
-	rm -f $(JARS)
-
-
