@@ -11,10 +11,9 @@ KOTLINC		:= kotlinc
 all: $(JARS)
 
 .kt.jar:
-	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@ 
-	jar uf $@ $(dir $<)plugin.yml
+	./build.
 
 .PHONY: clean
 clean:
-	rm -rf $(JARS)
+	rm -rf $()
 	
