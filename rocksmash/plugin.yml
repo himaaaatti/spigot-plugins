@@ -1,0 +1,3 @@
+name: rocksmash
+main: com.github.gist.thinca.spigot.plugin.Rocksmash.Rocksmash
+version: 1.0
