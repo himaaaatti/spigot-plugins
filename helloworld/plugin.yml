@@ -1,0 +1,5 @@
+name: HelloWorld
+main: com.github.himaaaatti.spigot.plugin.helloworld.HelloWorld
+version: 0.1
+
+
