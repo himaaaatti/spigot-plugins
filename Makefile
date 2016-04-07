@@ -1,6 +1,7 @@
 MINECRAFT_VERSION	:= 1.9.2
 #  MINECRAFT_VERSION	:= latest
-PLUGINS 	:= cut rocksmash
+
+PLUGINS 	:= cut rocksmash helloworld
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
@@ -12,7 +13,7 @@ KOTLINC		:= kotlinc
 WGET		:= wget
 JAVA 		:= java
 
-all: $(SPIGOT_API_JAR)
+all: $(JAR)
 
 $(BUILDTOOLS):
 	$(WGET) https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
@@ -24,10 +25,14 @@ $(API_JAR_ORG): $(BUILDTOOLS)
 $(SPIGOT_API_JAR): $(API_JAR_ORG)
 	cp $< $@
 
-.SUFFIXES:
+.SUFFIXES: .jar .kt 
+%.jar: %.kt $(SPIGOT_API_JAR)
+	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@
+	jar uf $@ $(dir $<)plugin.yml 
 
+all: $(JARS)
 
 .PHONY: clean
 clean:
-	rm -rf 
+	rm -rf $(JARS) 
 	
