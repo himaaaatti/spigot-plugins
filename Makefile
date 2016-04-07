@@ -1,6 +1,5 @@
-.SUFFIXES: .jar .kt
 
-PLUGINS 	:= cut rocksmash
+PLUGINS 	:= cut rocksmash helloworld
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
@@ -8,12 +7,14 @@ SPIGOT_API_JAR := spigot-api.jar
 
 KOTLINC		:= kotlinc
 
-all: $(JARS)
-
+.SUFFIXES: .jar .kt 
 .kt.jar:
-	./build.
+	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@
+	jar uf $@ $(dir $<)plugin.yml 
+
+all: $(JARS)
 
 .PHONY: clean
 clean:
-	rm -rf $()
+	rm -rf $(JARS)
 	
