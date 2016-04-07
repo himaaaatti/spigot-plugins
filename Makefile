@@ -22,8 +22,14 @@ $(API_JAR_ORG): $(BUILDTOOLS)
 	mkdir -p build
 	cd build && $(JAVA) -jar ../$< --rev $(MINECRAFT_VERSION)
 
-$(SPIGOT_API_JAR): $(API_JAR_ORG)
-	cp $< $@
+$(SPIGOT_API_JAR): $(API_JAR_ORG) $(BUILDTOOLS)
+ifeq ("" ,"$(API_JAR_ORG)")
+	mkdir -p build
+	cd build && $(JAVA) -jar ../$< --rev $(MINECRAFT_VERSION)
+	exit "please one more"
+endif
+
+	cp ./build/Spigot/Spigot-API/target/spigot-api-*-SNAPSHOT.jar $@
 
 .SUFFIXES: .jar .kt 
 %.jar: %.kt $(SPIGOT_API_JAR)
