@@ -4,7 +4,8 @@ PLUGINS 	:= cut rocksmash
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
-SPIGOT_API_JAR := spigot-api.jar
+API_JAR_ORG	:= $(wildcard build/Spigot/Spigot-API/target/spigot-api-*-SNAPSHOT.jar)
+SPIGOT_API_JAR := spigot-api-$(MINECRAFT_VERSION).jar
 BUILDTOOLS = BuildTools.jar
 
 KOTLINC		:= kotlinc
@@ -16,15 +17,17 @@ all: $(SPIGOT_API_JAR)
 $(BUILDTOOLS):
 	$(WGET) https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 
-$(SPIGOT_API_JAR): $(BUILDTOOLS)
+$(API_JAR_ORG): $(BUILDTOOLS)
 	mkdir -p build
-	cd build
-	$(JAVA) -jar $< --rev $(MINECRAFT_VERSION)
+	cd build && $(JAVA) -jar ../$< --rev $(MINECRAFT_VERSION)
+
+$(SPIGOT_API_JAR): $(API_JAR_ORG)
+	cp $< $@
 
 .SUFFIXES:
 
 
 .PHONY: clean
 clean:
-	rm -rf $()
+	rm -rf 
 	
