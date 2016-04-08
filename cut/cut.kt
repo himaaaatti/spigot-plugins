@@ -13,7 +13,11 @@ class Cut: JavaPlugin() {
         getServer().getPluginManager().registerEvents(
             object : Listener {
                 fun isLog(block: Block) = when (block.getType()) {
-                    Material.LOG, Material.LOG_2 -> true
+                    Material.LOG, 
+                    Material.LOG_2,
+                    Material.LEAVES,
+                    Material.LEAVES_2
+                    -> true
                     else -> false
                 }
                 
