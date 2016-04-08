@@ -1,7 +1,7 @@
 MINECRAFT_VERSION	:= 1.9.2
 #  MINECRAFT_VERSION	:= latest
 
-PLUGINS 	:= cut rocksmash helloworld
+PLUGINS 	:= cut rocksmash dig helloworld
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
@@ -41,4 +41,4 @@ all: $(JARS)
 .PHONY: clean
 clean:
 	rm -rf $(JARS) 
-	
+
