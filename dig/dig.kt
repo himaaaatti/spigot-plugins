@@ -15,7 +15,12 @@ class  Dig: JavaPlugin() {
             object : Listener {
                 fun isDirt(block: Block) = when (block.getType()) {
                     Material.GRASS,
-		    Material.DIRT -> true
+		    Material.DIRT,
+		    Material.SAND,
+		    Material.CLAY,
+		    Material.GRAVEL,
+		    Material.SOUL_SAND,
+		    Material.SNOW -> true
                     else -> false
                 }
 
