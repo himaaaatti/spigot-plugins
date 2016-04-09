@@ -1,0 +1,11 @@
+name: Stone_Break
+main: com.github.himaaaatti.spigot.plugin.stone_break.Stone_Break
+version: 0.1
+
+commands:
+   sb:
+     description: This is a stone_break on command.
+     usage: /<command> 
+     permission: 
+     permission-message: You don't have <permission>    
+
