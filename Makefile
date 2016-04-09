@@ -1,7 +1,7 @@
 MINECRAFT_VERSION	:= 1.9.2
 #  MINECRAFT_VERSION	:= latest
 
-PLUGINS 	:= cut rocksmash helloworld
+PLUGINS 	:= cut rocksmash dig helloworld
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
@@ -32,12 +32,13 @@ endif
 
 .SUFFIXES: .jar .kt 
 %.jar: %.kt $(SPIGOT_API_JAR)
-	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@
-	jar uf $@ $(dir $<)plugin.yml 
+#      cd $(dir $<)
+#      $(KOTLINC) -cp $(SPIGOT_API_JAR) $(dir $<).jar -include-runtime -d $(dir $<).kt
+#      jar uf $(dir $<).jar plugin.yml 
 
 all: $(JARS)
 
 .PHONY: clean
 clean:
 	rm -rf $(JARS) 
-	
+
