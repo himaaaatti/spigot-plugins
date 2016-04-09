@@ -101,8 +101,12 @@ class EggGacha: JavaPlugin() {
                         }
 
                         val item_stack = r_invent.getItem(first_slot)
-                        item_stack.setAmount(item_stack.getAmount() - 1)
-                        //TODO 最後の一つの時にsetAmount(0)とやっても亡くならない
+                        var amount = item_stack.getAmount() - 1
+                        if (amount == 0) {
+                            r_invent.setItem(first_slot, null)
+                        } else {
+                            item_stack.setAmount(amount)
+                        }
 
                         // set item to send_chest
                         val s_chest = send_chest.getState() as Chest
