@@ -26,15 +26,15 @@ $(SPIGOT_API_JAR): $(API_JAR_ORG) $(BUILDTOOLS)
 ifeq ("" ,"$(API_JAR_ORG)")
 	mkdir -p build
 	cd build && $(JAVA) -jar ../$< --rev $(MINECRAFT_VERSION)
-	exit "please one more"
 endif
 
 	cp ./build/Spigot/Spigot-API/target/spigot-api-*-SNAPSHOT.jar $@
 
 .SUFFIXES: .jar .kt 
 %.jar: %.kt $(SPIGOT_API_JAR)
-	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@
-	jar uf $@ $(dir $<)plugin.yml 
+#      cd $(dir $<)
+#      $(KOTLINC) -cp $(SPIGOT_API_JAR) $(dir $<).jar -include-runtime -d $(dir $<).kt
+#      jar uf $(dir $<).jar plugin.yml 
 
 all: $(JARS)
 
