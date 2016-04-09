@@ -8,7 +8,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.inventory
 import org.bukkit.plugin.java.JavaPlugin
 
 class  Stone_Break: JavaPlugin() {
@@ -72,9 +71,9 @@ class  Stone_Break: JavaPlugin() {
 			   args: Array<String>): Boolean
 	     {
     	     if(cmd.getName() == "sb"){
-	        if(args.size() == 0){
+	        if(args.size == 0){
 		    flag = !flag
-		}else if(args.size() == 1){
+		}else if(args.size == 1){
 		    when (args[0]){
 		        "on" -> flag = true
 			"off" -> flag = false
