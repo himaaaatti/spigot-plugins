@@ -1,7 +1,7 @@
 MINECRAFT_VERSION	:= 1.9.2
 #  MINECRAFT_VERSION	:= latest
 
-PLUGINS 	:= cut rocksmash dig helloworld
+PLUGINS 	:= cut rocksmash dig stone_break helloworld
 
 JARS		:= $(foreach name,$(PLUGINS), $(name)/$(name).jar)
 
