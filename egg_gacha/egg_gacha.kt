@@ -15,11 +15,11 @@ import org.bukkit.material.Pumpkin
 import org.bukkit.block.BlockFace
 import java.util.Random
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+//import org.bukkit.command.Command;
+//import org.bukkit.command.CommandSender;
+//TODO add command. 
 
 class EggGacha: JavaPlugin() {
-    //TODO redstone, wood_buttonなどのしょりを追加
     //TODO refoctor
 
     val rand = Random()
@@ -62,7 +62,6 @@ class EggGacha: JavaPlugin() {
                         if(face == null) {
                             return 
                         }
-                        //val receive_chest : Block? = getFaceBlock(pumpkin, face)
                         val receive_chest : Block? = pumpkin.getRelative(face)
                         if(receive_chest == null) 
                         {
@@ -119,64 +118,19 @@ class EggGacha: JavaPlugin() {
                         }
 
                         s_invent.setItem(first_empty, getRandomItem())
-
-                        /*
-                        if(receive_chest_block == null) 
-                        {
-                            getLogger().info("cannot found receive chest")
-                            return
-                        }
-
-                        val send_chest_block = pumpkin.getRelative(0, -1, 0)
-                        if(send_chest_block.getType() != Material.CHEST)
-                        {
-                            getLogger().info("cannot found send chest")
-                            return
-                        }
-
-                        // get egg from receive_chest
-                        getLogger().info("found both chest")
-                        //TODO 
-                        val r_chest = receive_chest_block.getState() as Chest
-                        val r_invent = r_chest.getBlockInventory()
-                        val first_slot: Int = r_invent.first(Material.EGG)
-
-                        getLogger().info(first_slot.toString())
-                        if(first_slot == -1) {
-                            getLogger().info("egg not found")
-                            return
-                        }
-
-                        val item_stack = r_invent.getItem(first_slot)
-                        item_stack.setAmount(item_stack.getAmount() - 1)
-                        //TODO 最後の一つの時にsetAmount(0)とやっても亡くならない
-
-                        // set item to send_chest
-                        val s_chest = send_chest_block.getState() as Chest
-                        val s_invent = s_chest.getBlockInventory()
-                        val first_empty = s_invent.firstEmpty()
-                        if(first_empty == -1) {
-                            item_stack.setAmount(item_stack.getAmount() + 1)
-                            getLogger().info("send chest have not empty")
-                            return
-                        }
-
-                        s_invent.setItem(first_empty, getRandomItem())
-                        */
                     }
                 }, this
         )
     }
 
-    override fun onCommand(sender: CommandSender,
-                    cmd: Command,
-                    label: String,
-                    args: Array<String>) : Boolean
-    {
-        getLogger().info("hello world by command")
-        return true
-//        return false
-    }
+//    override fun onCommand(sender: CommandSender,
+//                    cmd: Command,
+//                    label: String,
+//                    args: Array<String>) : Boolean
+//    {
+//        getLogger().info("hello world by command")
+//        return true
+//    }
 
     fun getRandomItem() :ItemStack {
         val mat_array = Material.values()
@@ -223,21 +177,6 @@ class EggGacha: JavaPlugin() {
             else -> {
                 return null
             }
-        }
-    }
-
-    fun getFaceBlock(block: Block, face: BlockFace) : Block?{
-//        val pump = block.getState().getData() as Pumpkin
-//        val face = pump.getFacing()
-//        getLogger().info(pump.getFacing().toString())
-
-        getLogger().info(face.toString())
-        return when(face) {
-            BlockFace.EAST -> block.getRelative(1, 0, 0)
-            BlockFace.WEST -> block.getRelative(-1, 0, 0)
-            BlockFace.SOUTH -> block.getRelative(0, 0, 1)
-            BlockFace.NORTH -> block.getRelative(0, 0, -1)
-            else -> null
         }
     }
 
