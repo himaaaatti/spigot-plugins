@@ -33,8 +33,9 @@ endif
 
 .SUFFIXES: .jar .kt 
 %.jar: %.kt $(SPIGOT_API_JAR)
-	$(KOTLINC) -cp $(SPIGOT_API_JAR) $< -include-runtime -d $@
-	jar uf $@ $(dir $<)plugin.yml 
+#      cd $(dir $<)
+#      $(KOTLINC) -cp $(SPIGOT_API_JAR) $(dir $<).jar -include-runtime -d $(dir $<).kt
+#      jar uf $(dir $<).jar plugin.yml 
 
 all: $(JARS)
 
