@@ -10,15 +10,16 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.block.Block
 import org.bukkit.material.Button
 import org.bukkit.inventory.ItemStack
+import org.bukkit.material.Attachable
 
 import java.util.Random
 
-//import org.bukkit.command.Command;
-//import org.bukkit.command.CommandSender;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 class EggGacha: JavaPlugin() {
-
-    //TODO redstone, wood_button, leverなどのしょりを追加
+    //TODO redstone, wood_buttonなどのしょりを追加
+    //TODO refoctor
 
     val rand = Random()
 
@@ -34,15 +35,18 @@ class EggGacha: JavaPlugin() {
                         if(e.getOldCurrent() >= e.getNewCurrent()) {
                             return
                         }
-                        val block = e.getBlock()
+//                        val block = e.getBlock()
 
+                        /*
                         if(block.getType() != Material.STONE_BUTTON) {
                             return
                         }
                         val button = block.getState().getData() as Button
                         val attached = block.getRelative(button.getAttachedFace())
+                        */
 
-                        if (attached.getType() != Material.PUMPKIN)
+                        val attached: Block? = getPumpkinBlock(e.getBlock())
+                        if (attached == null)
                         {
                             return
                         }
@@ -88,17 +92,17 @@ class EggGacha: JavaPlugin() {
                     }
                 }, this
         )
-
     }
 
-/*    override fun onCommand(sender: CommandSender,
+    override fun onCommand(sender: CommandSender,
                     cmd: Command,
                     label: String,
                     args: Array<String>) : Boolean
     {
-        return false
+        getLogger().info("hello world by command")
+        return true
+//        return false
     }
-    */
 
     fun getRandomItem() :ItemStack {
         val mat_array = Material.values()
@@ -106,6 +110,33 @@ class EggGacha: JavaPlugin() {
         val ran_index = rand.nextInt(mat_array.size)
 
         return ItemStack(mat_array[ran_index])
+    }
+
+    fun getPumpkinBlock(block: Block): Block? {
+
+        when(block.getType()) {
+            Material.STONE_BUTTON,
+            Material.WOOD_BUTTON,
+            Material.LEVER
+                -> 
+            {
+                val button = block.getState().getData() as Attachable
+                val attached = block.getRelative(button.getAttachedFace())
+
+                if(attached.getType() != Material.PUMPKIN) {
+                    return null
+                }
+
+                return attached
+            }
+
+            else -> {
+                return null
+            }
+
+        }
+
+//        return null
     }
 
     fun searchChest(block: Block) : Block? {
