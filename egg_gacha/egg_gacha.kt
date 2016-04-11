@@ -533,12 +533,16 @@ class EggGacha: JavaPlugin() {
 
                         //TODO change egg consumption
                         val item_stack = r_invent.getItem(first_slot)
-                        var amount = item_stack.getAmount() - 1
-                        if (amount == 0) {
-                            r_invent.setItem(first_slot, null)
-                        } else {
-                            item_stack.setAmount(amount)
+                        var amount = item_stack.getAmount()
+                        if(amount != 16) {
+                            return 
                         }
+
+                        //if (amount == 0) {
+                        r_invent.setItem(first_slot, null)
+                        //} else {
+                            //item_stack.setAmount(amount)
+                        //}
 
                         // set item to send_chest
                         val s_chest = send_chest.getState() as Chest
