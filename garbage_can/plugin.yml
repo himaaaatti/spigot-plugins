@@ -1,0 +1,5 @@
+name: GarbageCan
+main: com.github.himaaaatti.spigot.plugin.garbage_can.GarbageCan
+version: 0.1
+
+

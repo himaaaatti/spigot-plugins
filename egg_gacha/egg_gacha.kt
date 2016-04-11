@@ -531,6 +531,7 @@ class EggGacha: JavaPlugin() {
                             return
                         }
 
+                        //TODO change egg consumption
                         val item_stack = r_invent.getItem(first_slot)
                         var amount = item_stack.getAmount() - 1
                         if (amount == 0) {
