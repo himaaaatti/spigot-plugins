@@ -523,7 +523,8 @@ class EggGacha: JavaPlugin() {
                             return 
                         }
 
-                        val first_slot = r_invent.first(Material.EGG)
+                        //val first_slot = r_invent.first(Material.EGG)
+                        val first_slot = r_invent.first(ItemStack(Material.EGG, 16))
                         getLogger().info(first_slot.toString())
                         if(first_slot == -1) 
                         {
