@@ -8,7 +8,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.inventory
 import org.bukkit.plugin.java.JavaPlugin
 
 class Stone_Break : JavaPlugin() {
@@ -66,6 +65,7 @@ class Stone_Break : JavaPlugin() {
         )
     }
 
+<<<<<<< HEAD
     override fun onCommand(sender: CommandSender,
                            cmd: Command,
                            commandLabel: String,
@@ -92,5 +92,32 @@ class Stone_Break : JavaPlugin() {
         }
 
         return false
+=======
+    override fun onCommand(sender: CommandSender, 
+    	     	           cmd: Command, 
+			   commandLabel: String, 
+			   args: Array<String>): Boolean
+	     {
+    	     if(cmd.getName() == "sb"){
+	        if(args.size == 0){
+		    flag = !flag
+		}else if(args.size == 1){
+		    when (args[0]){
+		        "on" -> flag = true
+			"off" -> flag = false
+			"status" ->  { if(flag ==true){
+				           sender.sendMessage("stone_break: on")
+				 	}else {
+					   sender.sendMessage("stone_break: off")
+					}
+				      }
+			else -> {}
+		    }
+		}
+		return true
+	     }
+	     
+	     return false
+>>>>>>> 8c80686d195c3e32e7147dae486c88bd85baa497
     }
 }

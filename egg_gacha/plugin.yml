@@ -1,0 +1,11 @@
+name: EggGacha
+main: com.github.himaaaatti.spigot.plugin.egg_gacha.EggGacha
+version: 0.1
+
+#  author: himaaaatti
+#  commands:
+#      egg_gacha:
+#          description: This is a demo command.
+#          usage: /<command>
+#          permission: 
+#          permission-message: You don't have <permission>
