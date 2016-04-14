@@ -65,7 +65,6 @@ class Stone_Break : JavaPlugin() {
         )
     }
 
-<<<<<<< HEAD
     override fun onCommand(sender: CommandSender,
                            cmd: Command,
                            commandLabel: String,
@@ -73,6 +72,11 @@ class Stone_Break : JavaPlugin() {
         if (cmd.getName() == "sb") {
             if (args.size() == 0) {
                 flag = !flag
+                if (flag == true) {
+                    sender.sendMessage("stone_break: on")
+                } else {
+                    sender.sendMessage("stone_break: off")
+                }
             } else if (args.size() == 1) {
                 when (args[0]) {
                     "on" -> flag = true
@@ -92,32 +96,5 @@ class Stone_Break : JavaPlugin() {
         }
 
         return false
-=======
-    override fun onCommand(sender: CommandSender, 
-    	     	           cmd: Command, 
-			   commandLabel: String, 
-			   args: Array<String>): Boolean
-	     {
-    	     if(cmd.getName() == "sb"){
-	        if(args.size == 0){
-		    flag = !flag
-		}else if(args.size == 1){
-		    when (args[0]){
-		        "on" -> flag = true
-			"off" -> flag = false
-			"status" ->  { if(flag ==true){
-				           sender.sendMessage("stone_break: on")
-				 	}else {
-					   sender.sendMessage("stone_break: off")
-					}
-				      }
-			else -> {}
-		    }
-		}
-		return true
-	     }
-	     
-	     return false
->>>>>>> 8c80686d195c3e32e7147dae486c88bd85baa497
     }
 }
