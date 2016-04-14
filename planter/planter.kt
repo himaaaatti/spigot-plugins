@@ -83,11 +83,11 @@ class Planter: JavaPlugin() {
                         }
                     }
 
-                    if(below_block.getRelative(0, -1, 0).getType() != Material.AIR)
-                    {
+                    //if(below_block.getRelative(0, -1, 0).getType() != Material.AIR)
+                    //{
 //                        getLogger().info("not air")
-                        return
-                    }
+//                        return
+                    //}
                     
                     val chest = below_block.getRelative(0, -2, 0)
                     if(chest.getType() != Material.CHEST) 
