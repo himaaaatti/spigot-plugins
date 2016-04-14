@@ -88,7 +88,7 @@ class Dig : JavaPlugin() {
                            args: Array<String>): Boolean {
         getLogger().info("test")
         if (cmd.getName() == "dig") {
-            if (args.size() == 0) {
+            if (args.size == 0) {
                 flag = !flag
                 getLogger().info(flag.toString())
                 if (flag == true) {
@@ -96,7 +96,7 @@ class Dig : JavaPlugin() {
                 } else {
                     sender.sendMessage("dig: off")
                 }
-            } else if (args.size() == 1) {
+            } else if (args.size == 1) {
                 when (args[0]) {
                     "on" -> flag = true
                     "off" -> flag = false
