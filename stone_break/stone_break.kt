@@ -70,14 +70,14 @@ class Stone_Break : JavaPlugin() {
                            commandLabel: String,
                            args: Array<String>): Boolean {
         if (cmd.getName() == "sb") {
-            if (args.size() == 0) {
+            if (args.size == 0) {
                 flag = !flag
                 if (flag == true) {
                     sender.sendMessage("stone_break: on")
                 } else {
                     sender.sendMessage("stone_break: off")
                 }
-            } else if (args.size() == 1) {
+            } else if (args.size == 1) {
                 when (args[0]) {
                     "on" -> flag = true
                     "off" -> flag = false
