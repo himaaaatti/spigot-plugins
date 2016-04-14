@@ -1,0 +1,3 @@
+name: CustomRecipe
+main: com.github.himaaaatti.spigot.plugin.custom_recipe.CustomRecipe
+version: 0.1
