@@ -1,7 +1,7 @@
 #!/bin/bash -x
 set -eu
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
     echo "For example"
     echo "  ./build.sh cut ../spigot-api.jar"
     exit 1
@@ -24,3 +24,5 @@ then
     jar uf ${1}.jar config.yml
 fi
 
+mkdir -p /tmp/${3}
+cp ${1}.jar /tmp/${3}/
