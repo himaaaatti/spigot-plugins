@@ -4,6 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryOpenEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.block.SignChangeEvent
 
 import org.bukkit.event.Listener
@@ -16,23 +18,8 @@ import org.bukkit.inventory.Inventory
 
 class GarbageCan: JavaPlugin() {
 
-    fun checkText(sign: Sign) :Boolean {
-        val first_text = sign.getLine(0) 
-        val last_text = sign.getLine(3)
+    val GARBAGE_TEXT = "garbage"
 
-        getLogger().info(first_text)
-        if(first_text == "garbage") {
-            sign.setLine(3, "ok[0]")
-            return true
-        }
-        
-        if(last_text == "ok[0]") {
-            sign.setLine(3, "")
-        }
-        getLogger().info(first_text)
-        return false
-    }
-    
     override fun onEnable() {
 
         getServer().getPluginManager().registerEvents(
@@ -80,13 +67,14 @@ class GarbageCan: JavaPlugin() {
                                 break@loop
                             }
                         }
+
                         if(sign == null) {
                             return@isGarBageCan false
                         }
                             
 
-                        if(!checkText(sign)) {
-                            getLogger().info("sige is inValid")
+                        if(sign.getLine(0) != GARBAGE_TEXT)
+                        {
                             return@isGarBageCan false
                         }
 
@@ -95,15 +83,8 @@ class GarbageCan: JavaPlugin() {
 
                     @EventHandler
                     fun onChange(e: SignChangeEvent) {
-                        val sign = e.getBlock().getState() as Sign
-                        getLogger().info("changed")
-                        if(checkText(sign)) {
-                        getLogger().info("ok")
+                        if(e.getLine(0) == GARBAGE_TEXT){
                             e.setLine(3, "[ok]")
-                        }
-                        else {
-                        getLogger().info("no")
-                            e.setLine(3, "")
                         }
                     }
 
@@ -118,27 +99,33 @@ class GarbageCan: JavaPlugin() {
                         dest_invent.clear()
                     }
 
+//                    @EventHandler
+//                    fun onDrag(e: InventoryDragEvent) {
+//                        val dest_invent = e.getInventory()
+//                        if(!isGarBageCan(dest_invent)) {
+//                            return
+//                        }
+//                        dest_invent.clear()
+//                    }
+
                     @EventHandler
-                    fun onDrag(e: InventoryDragEvent) {
+                    fun onOpen(e: InventoryOpenEvent) {
                         val dest_invent = e.getInventory()
-                        getLogger().info("DragEvent 1")
-                        if(!isGarBageCan(dest_invent)) {
-                            getLogger().info("is not garbage can")
+                        if(!isGarBageCan(dest_invent))
+                        {
                             return
                         }
-                        getLogger().info("DragEvent 2")
-                        dest_invent.clear()
+                        //TODO set timer
                     }
 
                     @EventHandler
-                    fun onClick(e: InventoryClickEvent) {
+                    fun onClose(e: InventoryCloseEvent) {
                         val dest_invent = e.getInventory()
-                        if(!isGarBageCan(dest_invent)) {
-                            getLogger().info("is not garbage can")
+                        if(!isGarBageCan(dest_invent))
+                        {
                             return
                         }
-                        dest_invent.clear()
-
+                        dest_invent.clear();
                     }
 
                 }, this
