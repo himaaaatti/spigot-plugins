@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 set -eu
 
 if [ $# -ne 2 ]; then
@@ -22,8 +22,5 @@ fi
 if [ -e config.yml ]; 
 then
     jar uf ${1}.jar config.yml
-else 
-    echo config.yml not found
-    exit 1
 fi
 

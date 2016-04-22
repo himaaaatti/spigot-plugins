@@ -18,7 +18,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.block.Chest
 import org.bukkit.block.BlockFace
 //import org.bukkit.block.Sign
-
+import org.bukkit.inventory.InventoryHolder
 import org.bukkit.material.Sign
 import org.bukkit.material.Attachable
 
@@ -40,9 +40,11 @@ class Planter: JavaPlugin() {
                 @EventHandler
                 fun onChange(e: SignChangeEvent) {
                     val sign = e.getBlock().getState().getData() as Sign
-
-                    val chest = e.getBlock().getRelative(sign.getAttachedFace())
-                    if(chest.getType() != Material.CHEST) {
+                    val holder = e.getBlock().getRelative(sign.getAttachedFace())
+                    if(holder.getType() != Material.CHEST 
+                        && holder.getType() != Material.HOPPER)
+                    {
+                        getLogger().info("not chest or hopper!");
                         return
                     }
 
@@ -55,11 +57,17 @@ class Planter: JavaPlugin() {
                     //getLogger().info("planter")
                     e.setLine(1, "[ok]")
 
-
                     //WIP
                     // add chest data to task
                 }
 
+                // +--------+
+                // |  dirt  |
+                // +--------+
+                // |  any   |
+                // +--------+
+                // | holder | (chest or hopper and setted plate)
+                // +--------+
                 @EventHandler
                 fun onBreak(e: BlockBreakEvent) {
                     
@@ -83,33 +91,27 @@ class Planter: JavaPlugin() {
                         }
                     }
 
-                    //if(below_block.getRelative(0, -1, 0).getType() != Material.AIR)
-                    //{
-//                        getLogger().info("not air")
-//                        return
-                    //}
-                    
-                    val chest = below_block.getRelative(0, -2, 0)
-                    if(chest.getType() != Material.CHEST) 
+                    val holder = below_block.getRelative(0, -2, 0)
+                    if(holder.getType() != Material.CHEST 
+                        && holder.getType() != Material.HOPPER) 
                     {
-//                        getLogger().info("not chest")
                         return
                     }
 
                     val attached_sign = fun(face: BlockFace) : Boolean{
-//                        getLogger().info(chest.getRelative(face).getType().toString())
-                        if(chest.getRelative(face).getType() != Material.WALL_SIGN) 
+//                        getLogger().info(holder.getRelative(face).getType().toString())
+                        if(holder.getRelative(face).getType() != Material.WALL_SIGN) 
                         {
 //                            getLogger().info("not sign")
                             return false
                         }
 
-                        val sign = chest.getRelative(face).getState() 
+                        val sign = holder.getRelative(face).getState() 
                             as org.bukkit.block.Sign
 
                         if(sign.getLine(0) != PLANTER_TEXT)
                         {
-//                            getLogger().info("wrong text")
+                            getLogger().info("wrong text")
                             return false 
                         }
 
@@ -136,13 +138,11 @@ class Planter: JavaPlugin() {
                         attached_sign(BlockFace.NORTH) -> {}
                         else -> 
                             {
-//                                getLogger().info("attached")
-
                                 return@onBreak
                             }
                     }
 
-                    val inventory = (chest.getState() as Chest).getInventory()
+                    val inventory = (holder.getState() as InventoryHolder).getInventory()
                     val index = inventory.first(Material.SAPLING)
                     if(index == -1)
                     {
