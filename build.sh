@@ -24,5 +24,4 @@ then
     jar uf ${1}.jar config.yml
 fi
 
-mkdir -p /tmp/${3}
-cp ${1}.jar /tmp/${3}/
+cp ${1}.jar /result

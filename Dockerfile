@@ -19,10 +19,10 @@ RUN cp /Spigot/Spigot-API/target/spigot-api-*-SNAPSHOT.jar ${API_JAR}
 # get kotlinc
 RUN wget https://github.com/JetBrains/kotlin/releases/download/1.0.1-2/kotlin-compiler-1.0.1-2.zip
 
+ENV BUILD_NUMBER ${BUILD_NUMBER:-0}
 RUN unzip kotlin-compiler-1.0.1-2.zip
 ENV PATH $PATH:/kotlinc/bin/
 
-ENV BUILD_NUMBER ${BUILD_NUMBER:-0}
 RUN git clone https://github.com/himaaaatti/spigot-plugins
 
 WORKDIR /spigot-plugins
