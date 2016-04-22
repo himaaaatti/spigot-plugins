@@ -73,7 +73,8 @@ class Planter: JavaPlugin() {
                     
                     val current_block = e.getBlock()
                     val below_block = current_block.getRelative(0, -1, 0)
-                    if(below_block.getType() != Material.DIRT) 
+                    if(below_block.getType() != Material.DIRT
+                        && below_block.getType() != Material.GRASS) 
                     {
 //                        getLogger().info("not dirt")
                         return 
@@ -91,7 +92,7 @@ class Planter: JavaPlugin() {
                         }
                     }
 
-                    val holder = below_block.getRelative(0, -2, 0)
+                    val holder = below_block.getRelative(0, -1, 0)
                     if(holder.getType() != Material.CHEST 
                         && holder.getType() != Material.HOPPER) 
                     {
