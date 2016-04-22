@@ -1,7 +1,7 @@
 #!/bin/bash -x
 set -eu
 
-if [ $# -ne 3 ]; then
+if [ $# -ne 2 ]; then
     echo "For example"
     echo "  ./build.sh cut ../spigot-api.jar"
     exit 1
