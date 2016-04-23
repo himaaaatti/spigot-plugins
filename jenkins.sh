@@ -10,7 +10,8 @@ then
     exit 1
 fi
 
-mkdir -p /tmp/${1}
+result_dir=result/${1}
+mkdir -p ${result_dir}
 
 ls -F > /tmp/ls.out
 grep / /tmp/ls.out > /tmp/grep.out
@@ -20,5 +21,5 @@ echo ${plugins}
 
 for name in ${plugins[@]}
 do
-    docker run -e plugin_name=${name} -e BUILD_NUMBER=${1} -v /tmp/${1}:/result spigot:latest
+    docker run -e plugin_name=${name} -e BUILD_NUMBER=${1} -v ${result_dir}:/result spigot:latest
 done
