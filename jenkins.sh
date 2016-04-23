@@ -10,8 +10,8 @@ then
     exit 1
 fi
 
-result_dir=result/${1}
-mkdir -p ${result_dir}
+result_dir=`pwd`/result/${1}/
+mkdir -p ${result_dir}/
 
 ls -F > /tmp/ls.out
 grep / /tmp/ls.out > /tmp/grep.out
