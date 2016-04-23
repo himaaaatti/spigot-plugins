@@ -14,8 +14,9 @@ result_dir=`pwd`/result/${1}/
 mkdir -p ${result_dir}/
 
 ls -F > /tmp/ls.out
-grep / /tmp/ls.out > /tmp/grep.out
-plugins=`sed -e 's/\///g' /tmp/grep.out`
+grep / /tmp/ls.out > /tmp/grep0.out
+grep -v result /tmp/grep0.out > /tmp/grep1.out
+plugins=`sed -e 's/\///g' /tmp/grep1.out`
 
 echo ${plugins}
 
