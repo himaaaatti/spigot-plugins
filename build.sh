@@ -24,3 +24,4 @@ then
     jar uf ${1}.jar config.yml
 fi
 
+cp ${1}.jar /result
