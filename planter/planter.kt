@@ -55,7 +55,7 @@ class Planter: JavaPlugin() {
                         return
                     }
                     //getLogger().info("planter")
-                    e.setLine(1, "[ok]")
+                    e.setLine(3, "[ok]")
 
                     //WIP
                     // add chest data to task
@@ -64,9 +64,7 @@ class Planter: JavaPlugin() {
                 // +--------+
                 // |  dirt  |
                 // +--------+
-                // |  any   |
-                // +--------+
-                // | holder | (chest or hopper and setted plate)
+                // | holder | (chest or hopper is setted plate)
                 // +--------+
                 @EventHandler
                 fun onBreak(e: BlockBreakEvent) {
